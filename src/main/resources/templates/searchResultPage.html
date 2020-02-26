@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>meetup service</title>
+    <th:block th:replace="~{includes/commonScripts.html :: head}"/>
+</head>
+
+<body>
+
+<form th:action="@{/search}" method="get">
+    wyszukaj wydarzenie: <input type="text" name="search" id="search" th:value="${q}">
+    <select name="time" id="time" th:value="${t}">
+        <option value="current">trwające</option>
+        <option value="current-and-future">trwające i przyszłe</option>
+        <option value="all">wszystkie</option>
+    </select>
+    <button>wyszukaj</button>
+</form>
+
+<h2>znalezione wydarzenia</h2>
+<ul th:each="event : ${foundEvents}">
+    nazwa wydarzenia:
+    <h3>
+        <a th:href="@{'/eventDetails/' + ${event.getId()}}"><li th:text="${event.getEventName()}"></li></a>
+    </h3>
+    początek:
+    <li th:text="${event.getStartDate()}"></li>
+    koniec:
+    <li th:text="${event.getEndDate()}"></li>
+    opis:
+    <li th:text="${event.getDescription().substring(0,20)}"></li>
+</ul>
+
+<th:block th:replace="~{includes/commonScripts.html :: end-of-body}"/>
+</body>
+</html>

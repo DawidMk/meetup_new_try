@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>event details</title>
+    <th:block th:replace="~{includes/commonScripts.html :: head}"/>
+</head>
+<body>
+nazwa wydarzenia:
+<li th:text="${event.getEventName()}"></li>
+<br>
+początek:
+<li th:text="${event.getStartDate()}"></li>
+<br>
+koniec:
+<li th:text="${event.getEndDate()}"></li>
+<br>
+opis:
+<li th:text="${event.getDescription()}"></li>
+<br>
+zapisani użytkownicy:
+<ul th:each="attendant : ${attendants}">
+    <li th:text="${attendant.getName()}"></li>
+</ul>
+<br>
+
+<span th:if="${@userService.getLoggedUserName() != null}">
+<span th:if="${#sets.contains(attendants, @userService.getLoggedUser())}">
+        <a th:href="@{'/unsign/' + ${event.getId()}}">wypisz się z wydarzenia</a>
+</span>
+    <span th:unless="${#sets.contains(attendants, @userService.getLoggedUser())}">
+        <a th:href="@{'/signup/' + ${event.getId()}}">zapisz się na wydarzenie</a>
+</span>
+</span>
+<br>
+
+komentarze:
+
+<ul th:each="comment : ${comments}">
+    autor:
+    <li th:text="${comment.getAuthor().getName()}"></li>
+    komentarz:
+    <li th:text="${comment.getContents()}"></li>
+</ul>
+
+<br>
+
+<span th:if="${@userService.getLoggedUserName() != null}">
+    <span th:if="${#sets.contains(attendants, @userService.getLoggedUser())}">
+        <a th:href="@{'/unsign/' + ${event.getId()}}">wypisz się z wydarzenia</a>
+</span>
+    <span th:unless="${#sets.contains(attendants, @userService.getLoggedUser())}">
+        <a th:href="@{'/signup/' + ${event.getId()}}">zapisz się na wydarzenie</a>
+</span>
+    <br>
+
+Add comment:
+<form th:action="@{'/addComment/' + ${event.getId()}}" th:object="${addCommentFormDto}" method="post">
+    <table>
+        <tr>
+            <td><label for="contents">comment:</label></td>
+            <td><input type="text" th:field="*{contents}">
+                <span th:errors="*{contents}"></span>
+            </td>
+            <td>
+                <button>add comment</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</span>
+<br>
+<th:block th:replace="~{includes/commonScripts.html :: end-of-body}"/>
+</body>
+</html>

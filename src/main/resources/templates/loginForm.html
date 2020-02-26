@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>meetup service</title>
+    <th:block th:replace="~{includes/commonScripts.html :: head}"/>
+</head>
+
+<body>
+<form th:action="@{/login-processing}" method="post">
+    <table>
+        <tr>
+            <td><label for="login">login</label></td>
+            <td>
+                <input type="text" name="login" id="login"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">password</label></td>
+            </td>
+            <td>
+                <input type="password" name="password" id="password"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button>log in</button>
+            </td>
+        </tr>
+    </table>
+    <!--<a href="/" class="btn btn-info" role="button">main page</a>-->
+
+</form>
+<th:block th:replace="~{includes/commonScripts.html :: end-of-body}"/>
+</body>
+</html>

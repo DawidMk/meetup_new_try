@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>register form</title>
+    <th:block th:replace="~{includes/commonScripts.html :: head}"/>
+</head>
+<body>
+<form th:action="@{/addEvent}" th:object="${addEventFormDto}" method="post">
+    <table>
+        <tr>
+            <td>
+                <label for="eventName">title</label>
+            </td>
+            <td>
+                <input type="text"
+                       th:field="*{eventName}">
+                <span th:errors="*{eventName}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="description">description</label>
+            </td>
+            <td>
+                <input type="text"
+                       th:field="*{description}">
+                <span th:errors="*{description}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="startDate">start date</label>
+            </td>
+            <td>
+                <input type="text"
+                       th:field="*{startDate}"
+                       placeholder="yyyy/MM/dd">
+                <span th:errors="*{startDate}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="endDate">end date</label>
+            </td>
+            <td>
+                <input type="text"
+                       th:field="*{endDate}"
+                       placeholder="yyyy/MM/dd">
+                <span th:errors="*{endDate}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="picture">end date</label>
+            </td>
+            <td>
+                <input type="file"
+                       th:field="*{picture}">
+            </td>
+        </tr>
+        <tr>
+        <tr>
+            <td>
+                <button>add event</button>
+            </td>
+        </tr>
+
+    </table>
+
+</form>
+<a href="/" class="btn btn-info" role="button">main page</a>
+
+<th:block th:replace="~{includes/commonScripts.html :: end-of-body}"/>
+
+</body>
+</html>

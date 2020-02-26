@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>meetup service</title>
+    <th:block th:replace="~{includes/commonScripts.html :: head}"/>
+</head>
+
+<body>
+<p th:text="'unsigned from event'" />
+
+<span>
+<!--<a href="/" class="btn btn-info" role="button">main page</a>-->
+<a href="#" class="btn btn-info" role="button" onclick="location.href = document.referrer; return false;">Back to event</a>
+</span>
+
+<th:block th:replace="~{includes/commonScripts.html :: end-of-body}"/>
+
+</body>
+</html>
