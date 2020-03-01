@@ -13,6 +13,11 @@ public class SomeTest {
         Map<String, List<Address>> someMap3 = new HashMap<>();
         List<Address> someList = new ArrayList<>();
 
+        String aaa ="aaaa";
+        int i = aaa.codePointAt(1);
+        System.out.println(i);
+        System.gc();
+
         Address hsn = new Address(1, "1");
         Address hsn1 = new Address(2, "2");
         Address hsn2 = new Address(3, "3");

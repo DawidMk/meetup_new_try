@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>meetup service</title>
+    <th:block th:replace="~{includes/commonScripts.html :: head}"/>
+</head>
+
+<body>
+<p th:text="'index page'"/>
+<br>
+
+<form th:action="@{/search}" method="get">
+wyszukaj wydarzenie: <input type="text" name="search" id="search" th:value="${q}">
+    <select name="time" id="time" th:value="${t}">
+        <option value="current">trwające</option>
+        <option value="current-and-future">trwające i przyszłe</option>
+        <option value="all">wszystkie</option>
+    </select>
+    <button>wyszukaj</button>
+</form>
+
+<br>
+<span th:if="${@userService.getLoggedUserName() == null}">
+    <a href="login" class="btn btn-info" role="button">Log in</a>
+    <a href="register" class="btn btn-info" role="button">Register</a>
+<br>
+</span>
+
+<span th:if="${@userService.getLoggedUserName() != null}">
+logged as user: <text th:text="${@userService.getLoggedUserName()}"></text><br>
+            <a href="addEvent" class="btn btn-info" role="button">add event</a><br>
+
+        <a href="logout" class="btn btn-info" role="button">Log out</a><br>
+
+</span>
+
+<!--<h2>lista wydarzeń</h2>-->
+<!--<ul th:each="event : ${events}">-->
+    <!--nazwa wydarzenia:-->
+    <!--<h3>-->
+        <!--<a th:href="@{'/eventDetails/'+${event.getId()}}"><li th:text="${event.getEventName()}"></li></a>-->
+    <!--</h3>-->
+    <!--początek:-->
+    <!--<li th:text="${event.getStartDate()}"></li>-->
+    <!--koniec:-->
+    <!--<li th:text="${event.getEndDate()}"></li>-->
+    <!--opis:-->
+    <!--<li th:text="${event.getDescription().substring(0,50)}"></li>-->
+<!--</ul>-->
+
+<h2>lista wydarzeń</h2>
+<ul th:each="event : ${events}">
+    nazwa wydarzenia:
+    <h3>
+        <a th:href="@{'/eventDetails/'+${event.getId()}}"><li th:text="${event.getEventName()}"></li></a>
+    </h3>
+    początek:
+    <li th:text="${event.getStartDate()}"></li>
+    koniec:
+    <li th:text="${event.getEndDate()}"></li>
+    opis:
+    <li th:text="${event.getDescription().substring(0,20)}"></li>
+</ul>
+
+<!--<h2>lista wydarzeń</h2>-->
+<!--<ul th:each="event : ${events}">-->
+    <!--nazwa wydarzenia:-->
+    <!--<a th:href="@{'/eventDetails/'+${event.getId()}}">-->
+        <!--<li th:text="${event.getEventName()}"></li>-->
+    <!--</a>-->
+
+    <!--początek:-->
+    <!--<li th:text="${event.getStartDate()}"></li>-->
+    <!--koniec:-->
+    <!--<li th:text="${event.getEndDate()}"></li>-->
+    <!--opis:-->
+    <!--<li th:text="${event.getDescription().substring(0,50)}"></li>-->
+<!--</ul>-->
+
+
+<th:block th:replace="~{includes/commonScripts.html :: end-of-body}"/>
+
+</body>
+</html>
